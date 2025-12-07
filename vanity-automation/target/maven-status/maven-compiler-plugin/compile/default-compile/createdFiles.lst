@@ -1,0 +1,3 @@
+com\vanity\InstallBrowsers.class
+com\vanity\automation\EcommerceAutomation.class
+com\vanity\automation\RunEcommerceAutomation.class

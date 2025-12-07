@@ -1,0 +1,55 @@
+@startuml
+
+class User {
+  +id: long
+  +email: string
+  +password_hash: string
+  +full_name: string
+  +is_admin: bool
+  +register()
+  +login()
+}
+
+class Product {
+  +id: long
+  +name: string
+  +brand: string
+  +price: decimal
+  +stock: int
+  +decrementStock(qty:int)
+}
+
+class Order {
+  +id: long
+  +user_id: long
+  +subtotal: decimal
+  +shipping_fee: decimal
+  +tax_amount: decimal
+  +discount_amount: decimal
+  +total: decimal
+  +status: string
+  +checkout(): bool
+}
+
+class OrderItem {
+  +id: long
+  +order_id: long
+  +product_id: long
+  +quantity: int
+  +unit_price: decimal
+  +line_total: decimal
+}
+
+class InventoryLog {
+  +id: long
+  +product_id: long
+  +delta: int
+  +reason: string
+}
+
+User "1" -- "*" Order
+Order "1" -- "*" OrderItem
+OrderItem "*" -- "1" Product
+InventoryLog "*" -- "1" Product
+
+@enduml
