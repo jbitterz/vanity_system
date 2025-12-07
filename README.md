@@ -1,76 +1,124 @@
+
 # Vanity Ordering Make-Up System
 
-A greenfield Laravel + Breeze platform where customers browse, order, and track cosmetics from Sephora, MAC, Maybelline, Olay, and L'Oreal. The stack is strictly **PHP / HTML / CSS / Laravel Breeze / MariaDB (SQL)**, optimized for responsive layouts and reliable order tracking.
+A **Laravel 11** application with Breeze authentication for browsing, ordering, and tracking cosmetics from **Sephora, MAC, Maybelline, Olay, and L'Oreal**. Built with **PHP, Blade templates, Tailwind CSS, and MariaDB**, optimized for responsive layouts and reliable order management.
 
 ---
 
-## 1. System Overview
-- Users register/login, browse catalog, add products to cart, and checkout with transparent pricing.
-- Orders store subtotal, shipping, tax, final total, and transaction IDs; inventory adjusts atomically.
-- Admins manage products and stock, update order statuses, and audit sales history.
+## Features
 
-### Actors
-Customer, Admin/Staff, Payment Gateway.
-
----
-
-## 2. Key Features
-1. **User Authentication**
-   - Sign-Up and Login pages handled by Laravel Breeze.
-   - Unique user IDs stored in MariaDB; passwords hashed with bcrypt/argon2.
-   - Authenticated users access ordering workflow and purchase history.
-2. **Product Ordering (5 Brands)**
-   - Catalog lists Sephora, MAC, Maybelline, Olay, L'Oreal items.
-   - Each record shows name, brand, unit price, stock flag, and Add-to-Cart action.
-   - Users mix products across brands in one order.
-3. **Inventory Management**
-   - Stock decrements on successful checkout; prevents oversell.
-   - Admin endpoints to restock or adjust quantities with audit logs.
-4. **Price Computation**
-   - Subtotal = sum(item price × quantity).
-   - Total Cost = Subtotal + Shipping Fee + Tax (configurable via `config/pricing.php`).
-   - Coupon/discount hooks included for future use.
-5. **Checkout & Transaction Handling**
-   - Checkout screen shows order summary, calculated totals, and confirmation.
-   - Each purchase generates a transaction ID, persists to DB, and logs critical events.
-6. **Order Database**
-   - Tables cover users, products, inventory logs, orders, and order_items.
-   - Orders store timestamps, totals, and user linkage for analytics.
-7. **User Purchase History**
-   - Logged-in users view past transactions with product lines, amounts, and status (pending/paid/shipped/delivered/cancelled).
+* **User Authentication**: Registration and login via Laravel Breeze.
+* **Product Catalog**: Browse and order products from multiple brands.
+* **Shopping Cart**: Add items to cart, manage quantities.
+* **Checkout Process**: Secure checkout with order summary and transaction handling.
+* **Order Tracking**: View order history and status updates (pending/paid/shipped/delivered/cancelled).
+* **Inventory Management**: Real-time stock updates; admin controls to manage products and restock.
+* **Responsive Design**: Mobile-friendly UI using Tailwind CSS and optional Alpine.js.
 
 ---
 
-## 3. Technology Summary
-- **Backend**: Laravel 11 + Breeze auth, REST controllers.
-- **Frontend**: Blade or lightweight SPA using HTML/CSS and optional Alpine.js.
-- **Database**: MariaDB/MySQL using SQL schema in `sql/schema.sql` (also compatible with SQLite for dev).
-- **Tooling**: Composer, npm/Vite for assets, Pest/PHPUnit for tests.
+## Tech Stack
+
+* **Framework**: Laravel 11
+* **Authentication**: Laravel Breeze
+* **Frontend**: Blade templates, Tailwind CSS, Alpine.js
+* **Database**: MariaDB / MySQL
+* **Build Tool**: Vite
+* **Testing**: PHPUnit / Pest
 
 ---
 
-## 4. Documentation & Deliverables
-| Area | File |
-| --- | --- |
-| Architecture | `docs/architecture.md` |
-| Use cases & flows | `docs/use_cases.md` |
-| Checkout sequence | `docs/sequence_checkout.md` |
-| API endpoints | `docs/api_endpoints.md` |
-| SQL schema | `sql/schema.sql` |
-| PlantUML classes | `uml/vanity_classes.puml` |
-| UI mock | `ui/mockup.html` (wireframes pending manual edit) |
-| WinForms reference | `csharp/WinFormsScaffold.cs` |
-| Laravel plan | `laravel/structure.md` |
-| Acceptance tests | `tests/acceptance.md` |
-| Deployment plan | `deployment/plan.md` |
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   cd vanity
+   ```
+2. Install dependencies:
+
+   ```bash
+   composer install
+   npm install
+   ```
+3. Set up environment:
+
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+4. Configure database in `.env` file.
+5. Run migrations and seeders:
+
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   ```
+6. Build assets:
+
+   ```bash
+   npm run build
+   ```
+7. Start the server:
+
+   ```bash
+   php artisan serve
+   ```
+8. Access the app at `http://localhost:8000`.
 
 ---
 
-## 5. Next Steps
-1. Initialize Laravel Breeze project targeting MariaDB.
-2. Implement migrations using `sql/schema.sql` as the baseline.
-3. Wire up controllers/services per `laravel/structure.md`.
-4. Build responsive Blade views mirroring `ui/mockup.html`.
-5. Execute acceptance tests and follow the deployment plan for staging/prod.
+## Usage
 
-Need additional artifacts (seed data, rendered UML, Breeze project scaffolding)? Let me know and I'll add them within this folder.
+* Register or login as a customer.
+* Browse products by brand and add items to the cart.
+* Proceed to checkout with order summary and payment.
+* Track order status and view purchase history.
+
+---
+
+## Project Structure
+
+* `app/Http/Controllers/` – Application controllers
+* `app/Models/` – Eloquent models
+* `resources/views/` – Blade templates
+* `routes/` – Route definitions
+* `database/migrations/` – Database migrations
+* `database/seeders/` – Seeders
+
+---
+
+## Documentation
+
+| Area               | File                         |
+| ------------------ | ---------------------------- |
+| Architecture       | `docs/architecture.md`       |
+| Use Cases & Flows  | `docs/use_cases.md`          |
+| Checkout Sequence  | `docs/sequence_checkout.md`  |
+| API Endpoints      | `docs/api_endpoints.md`      |
+| SQL Schema         | `sql/schema.sql`             |
+| UML Classes        | `uml/vanity_classes.puml`    |
+| UI Mockup          | `ui/mockup.html`             |
+| WinForms Reference | `csharp/WinFormsScaffold.cs` |
+| Laravel Structure  | `laravel/structure.md`       |
+| Acceptance Tests   | `tests/acceptance.md`        |
+| Deployment Plan    | `deployment/plan.md`         |
+
+---
+
+## Contributing
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Make changes and commit.
+4. Push the branch and open a pull request.
+
+---
+
+## License
+
+This project is licensed under the **MIT License**.
+
+---
+
