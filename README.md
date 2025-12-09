@@ -64,6 +64,7 @@ A **Laravel 11** application with Breeze authentication for browsing, ordering, 
 
    ```bash
    php artisan serve
+   node --run dev
    ```
 8. Access the app at `http://localhost:8000`.
 
