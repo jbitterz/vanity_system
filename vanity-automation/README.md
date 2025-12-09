@@ -7,11 +7,11 @@ This Java project uses **Selenium WebDriver** to automate the e-commerce workflo
 * Java 11 or higher
 * Maven
 * Chrome browser
-* XAMPP with the Vanity Laravel application running on `http://localhost/vanity`
+* XAMPP with the Vanity Laravel application running on `http://localhost/8000`
 
 ## Setup
 
-1. Ensure the Vanity Laravel application is running on XAMPP at `http://localhost/vanity`.
+1. Ensure the Vanity Laravel application is running on XAMPP at `http://localhost/8000`.
 2. The script will register a new test user automatically, but you can provide your own email and password if desired.
 3. The user should have at least one saved address for checkout (the script can also add a new address).
 
